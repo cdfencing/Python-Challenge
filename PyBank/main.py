@@ -6,18 +6,16 @@ csvpath = os.path.join('.', 'Resources', 'budget_data.csv')
 print("opening", csvpath)
 count_of_month = 1
 
-avg = 0
+Average_Change = 0
 x = 0
 y = 0
-
-
 
 with open(csvpath) as csvfile:
     # CSV reader specifies delimiter and variable that holds contents
     csvreader = csv.reader(csvfile, delimiter=',')
     
-    # Read the header row first (skip this step if there is now header)
-    csv_header = next(csvreader)
+    # Read the header row first 
+    csv_header = next(csvreader) 
     csv_init = next(csvreader) #grabbing starting values under header
 
     startdate = csv_init[0]
@@ -33,8 +31,8 @@ with open(csvpath) as csvfile:
     
     for row in csvreader: #now starting at row 3 in data
         #grab value from the next row, 
-        total = total + int(row[1]) #debug
-        count_of_month += 1 #debug
+        total = total + int(row[1]) 
+        count_of_month += 1 
          
         max_inc_profit = (int(row[1])) - int(initPL)
         
@@ -42,27 +40,25 @@ with open(csvpath) as csvfile:
             x = max_inc_profit
             maxp_date = row[0]
         
-        initPL = int(row[1])
-
-        max_dec_profit = (int(row[1])) + int(initPL)
+        max_dec_profit = (int(row[1])) - int(initPL)
         
         if max_dec_profit < y: #y stands for current max loss
-            y = max_dec_profit
+            y = max_dec_profit 
             maxl_date = row[0]
         
-        initPL = int(row[1])
+        initPL = int(row[1]) #iterates through the data
 
-
-    #     #avg = total / len(row[1]) #debug, not right value need totalizer
+        #Average_Change = (sum of changes in profits and losses) / 85
+    
     
     print(f"Total Months: {count_of_month}")  
     print(f"Total: ${total}")
-    #print(f"Average Change: {avg}") #debug
+    print(f"Average Change: {Average_Change}") #should be $-2315.12 
     print(f"Greatest Increase in Profits: ({maxp_date} {x}) ") 
-    print(f"Greatest Decrease in Profits: ({maxl_date} {y}) ") #debug   should be ($-2196167)   
+    print(f"Greatest Decrease in Profits: ({maxl_date} {y}) ")   
     
     
-    
+    #avg = total / len(row[1]) #debug, not right value need totalizer
     
 
 
