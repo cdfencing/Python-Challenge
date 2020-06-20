@@ -8,6 +8,7 @@ count_of_month = 1
 
 avg = 0
 x = 0
+y = 0
 
 
 
@@ -42,35 +43,28 @@ with open(csvpath) as csvfile:
             maxp_date = row[0]
         
         initPL = int(row[1])
-    #     #avg = total / len(row[1]) #debug, not right value
+
+        max_dec_profit = (int(row[1])) + int(initPL)
         
-    #     #max_dec_profit = min(row[1]) #debug, not right value need if statement
+        if max_dec_profit < y: #y stands for current max loss
+            y = max_dec_profit
+            maxl_date = row[0]
+        
+        initPL = int(row[1])
+
+
+    #     #avg = total / len(row[1]) #debug, not right value need totalizer
     
     print(f"Total Months: {count_of_month}")  
     print(f"Total: ${total}")
     #print(f"Average Change: {avg}") #debug
-    print(f"Greatest Increase in Profits: {maxp_date} {max_inc_profit}") #debug
-    # #print(f"Greatest Decrease in Profits: {max_dec_profit}") #debug      
+    print(f"Greatest Increase in Profits: ({maxp_date} {x}) ") 
+    print(f"Greatest Decrease in Profits: ({maxl_date} {y}) ") #debug   should be ($-2196167)   
     
     
     
-    
-    # #headerrow = next(csvreader) #skip header
-    # #nextrow = next(csvreader) # grab next row 
-   
     
 
-    # #for row in csvreader:
-    #     #count_of_month += 1
-    
-
-    # #for row in csvreader:
-    #     #count_of_month += 1
-    
-
-    # #for row in csvreader:
-    #     #count_of_month += 1
-    
 
 
 
