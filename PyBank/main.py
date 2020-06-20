@@ -1,4 +1,3 @@
-
 import os
 import csv
 
@@ -6,7 +5,6 @@ csvpath = os.path.join('.', 'Resources', 'budget_data.csv')
 print("opening", csvpath)
 count_of_month = 1
 
-Average_Change = 0
 x = 0
 y = 0
 
@@ -28,12 +26,19 @@ with open(csvpath) as csvfile:
 
     print("Financial Analysis: ") 
     print("------------------------")
+
+    
+    monthly_changes = []
     
     for row in csvreader: #now starting at row 3 in data
         #grab value from the next row, 
         total = total + int(row[1]) 
         count_of_month += 1 
-         
+
+        if count_of_month > 0: # do this every time, starting with the second time
+            monthly_change = int(row[1]) - int(initPL)
+            monthly_changes.append(monthly_change)
+     
         max_inc_profit = (int(row[1])) - int(initPL)
         
         if max_inc_profit > x: #x stands for current max profit
@@ -47,20 +52,14 @@ with open(csvpath) as csvfile:
             maxl_date = row[0]
         
         initPL = int(row[1]) #iterates through the data
+    
+    Average_Changes = sum(monthly_changes) / len(monthly_changes)
+    Average_Changes = round(Average_Changes,2)
 
-        #Average_Change = (sum of changes in profits and losses) / 85
-    
-    
+
     print(f"Total Months: {count_of_month}")  
     print(f"Total: ${total}")
-    print(f"Average Change: {Average_Change}") #should be $-2315.12 
+    print(f"Average Change: ${Average_Changes}") #should be $-2315.12 
     print(f"Greatest Increase in Profits: ({maxp_date} {x}) ") 
     print(f"Greatest Decrease in Profits: ({maxl_date} {y}) ")   
-    
-    
-    #avg = total / len(row[1]) #debug, not right value need totalizer
-    
-
-
-
-
+   
