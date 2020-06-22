@@ -21,8 +21,6 @@ with open(csvpath) as csvfile:
 
     total = int(initPL)
 
-    #print(startdate)
-    #print(initPL)
 
     print("Financial Analysis: ") 
     print("------------------------")
