@@ -59,7 +59,7 @@ with open(csvpath) as csvfile:
 
     print(f"Total Months: {count_of_month}")  
     print(f"Total: ${total}")
-    print(f"Average Change: ${Average_Changes}") #should be $-2315.12 
-    print(f"Greatest Increase in Profits: ({maxp_date} {x}) ") 
-    print(f"Greatest Decrease in Profits: ({maxl_date} {y}) ")   
+    print(f"Average Change: ${Average_Changes}") 
+    print(f"Greatest Increase in Profits: {maxp_date} (${x}) ") 
+    print(f"Greatest Decrease in Profits: {maxl_date} (${y}) ")   
    
