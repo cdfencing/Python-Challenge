@@ -2,36 +2,39 @@ import os
 import csv
 
 csvpath = os.path.join('.', 'Resources', 'election_data.csv')
-print("opening", csvpath)
-count_of_votes = 1
+print("opening", csvpath) 
 
+total = 0
+candidates_list = []
 
+Khan_votes =0
+Li_votes = 0
+Correy_votes = 0
+OTooley_votes = 0
 
 with open(csvpath) as csvfile:
     # CSV reader specifies delimiter and variable that holds contents
     csvreader = csv.reader(csvfile, delimiter=',')
-
     csv_header = next(csvreader) # Read the header row first
-    csv_init = next(csvreader) #grabbing starting values under header
+    
+    for row in csvreader: #now starting at row 2
+        total += 1
+        
+        candidate = row[2]
 
-    candidate_votes = csv_init[0]
-    candidate = csv_init[1] #need to make this a list so it pulls both names
-
-    total = int(candidate_votes)
-
-    print(candidate)
-    print(candidate_votes)
+        if candidate == "Khan": 
+            Khan_votes += 1
+        if candidate == "Li":
+            Li_votes += 1
+        if candidate == "Correy":
+            Correy_votes += 1
+        if candidate == "O'Tooley":
+            OTooley_votes += 1
 
     print("Election Results: ") 
     print("------------------------")
 
-    for row in csvreader: #now starting at row 3 in data
-        #grab value from the next row, 
-        total = total + int(row[0])
-        count_of_votes += 1
 
-
-
-
-    print(f"Total Votes: {count_of_votes}")
+    print(f"Total Votes: {total}")
     print("------------------------")
+    
