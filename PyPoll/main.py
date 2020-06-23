@@ -73,4 +73,6 @@ with open(csvpath) as csvfile:
     print("------------------------")
     print(f"Winner: {winner}")
     print("------------------------")
-    
+
+with open(output_path, "Analysis") as textfile:
+    textfile.write(report)

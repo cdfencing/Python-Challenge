@@ -60,4 +60,6 @@ with open(csvpath) as csvfile:
     print(f"Average Change: ${Average_Changes}") 
     print(f"Greatest Increase in Profits: {maxp_date} (${x}) ") 
     print(f"Greatest Decrease in Profits: {maxl_date} (${y}) ")   
-   
+
+with open(output_path, "Analysis") as textfile:
+    textfile.write(report)
