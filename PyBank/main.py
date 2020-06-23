@@ -2,6 +2,7 @@ import os
 import csv
 
 csvpath = os.path.join('.', 'Resources', 'budget_data.csv')
+results_output = os.path.join('.', 'Analysis', 'Financial_Analysis.txt')
 print("opening", csvpath)
 count_of_month = 1
 
@@ -21,11 +22,6 @@ with open(csvpath) as csvfile:
 
     total = int(initPL)
 
-
-    print("Financial Analysis: ") 
-    print("------------------------")
-
-    
     monthly_changes = []
     
     for row in csvreader: #now starting at row 3 in data
@@ -54,12 +50,19 @@ with open(csvpath) as csvfile:
     Average_Changes = sum(monthly_changes) / len(monthly_changes)
     Average_Changes = round(Average_Changes,2)
 
+Results = (
+    f"Financial Analysis: \n" 
+    f"------------------------\n"
+    f"Total Months: {count_of_month}\n"
+    f"Total: ${total}\n"
+    f"Average Change: ${Average_Changes}\n"
+    f"Greatest Increase in Profits: {maxp_date} (${x}) \n"
+    f"Greatest Decrease in Profits: {maxl_date} (${y}) \n")  
 
-    print(f"Total Months: {count_of_month}")  
-    print(f"Total: ${total}")
-    print(f"Average Change: ${Average_Changes}") 
-    print(f"Greatest Increase in Profits: {maxp_date} (${x}) ") 
-    print(f"Greatest Decrease in Profits: {maxl_date} (${y}) ")   
+print(Results)
 
-with open(output_path, "Analysis") as textfile:
-    textfile.write(report)
+with open(results_output, 'w') as textfile:
+    textfile.write(Results)
+
+
+

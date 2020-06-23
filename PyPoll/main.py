@@ -2,6 +2,7 @@ import os
 import csv
 
 csvpath = os.path.join('.', 'Resources', 'election_data.csv')
+results_output = os.path.join('.', 'Analysis', 'Election_Analysis.txt')
 print("opening", csvpath) 
 
 total = 0
@@ -42,16 +43,13 @@ with open(csvpath) as csvfile:
             OTooley_votes += 1
     
     Khan_percent = (Khan_votes / total) * 100 
-    Khan_percent = round(Khan_percent,3)
 
     Correy_percent = (Correy_votes / total) * 100 
-    Correy_percent = round(Correy_percent,3)
-
+    
     Li_percent = (Li_votes / total) * 100 
-    Li_percent = round(Li_percent,3)
-
+    
     OTooley_percent = (OTooley_votes / total) * 100 
-    OTooley_percent = round(OTooley_percent,3)
+    
 
     if Khan_percent > Correy_percent and Li_percent and OTooley_percent:
         winner = Khan
@@ -62,17 +60,20 @@ with open(csvpath) as csvfile:
     elif OTooley_percent > Khan_percent and Correy_percent and Li_percent:
         winner = OTooley
 
-    print("Election Results: ") 
-    print("------------------------")
-    print(f"Total Votes: {total}")
-    print("------------------------")
-    print(f"Khan: {Khan_percent}% ({Khan_votes}) ")
-    print(f"Correy: {Correy_percent}% ({Correy_votes}) ")
-    print(f"Li: {Li_percent}% ({Li_votes}) ")
-    print(f"O'Tooley: {OTooley_percent}% ({OTooley_votes}) ")
-    print("------------------------")
-    print(f"Winner: {winner}")
-    print("------------------------")
+Results = (
+    f"Election Results: \n"
+    f"------------------------\n"
+    f"Total Votes: {total}\n"
+    f"------------------------\n"
+    f"Khan: {Khan_percent:.3f}% ({Khan_votes}) \n"
+    f"Correy: {Correy_percent:.3f}% ({Correy_votes}) \n"
+    f"Li: {Li_percent:.3f}% ({Li_votes}) \n"
+    f"O'Tooley: {OTooley_percent:.3f}% ({OTooley_votes}) \n"
+    f"------------------------\n"
+    f"Winner: {winner}\n"
+    f"------------------------\n")
 
-with open(output_path, "Analysis") as textfile:
-    textfile.write(report)
+print(Results)
+
+with open(results_output, 'w') as textfile:
+     textfile.write(Results)
